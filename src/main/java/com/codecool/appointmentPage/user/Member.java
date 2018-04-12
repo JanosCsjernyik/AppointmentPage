@@ -1,14 +1,48 @@
 package com.codecool.appointmentPage.user;
 
-public class User {
+import com.codecool.appointmentPage.ticket.Ticket;
+import com.codecool.appointmentPage.training.Training;
 
+import javax.persistence.*;
+import java.util.List;
+
+
+@Entity
+@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
+public abstract class Member {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private String firstName;
     private String lastName;
     private String username;
     private String email;
+    private String passWord;
 
-    public User(Long id, String firstName, String lastName, String username, String email) {
+    public String getPassWord() {
+        return passWord;
+    }
+
+    public void setPassWord(String passWord) {
+        this.passWord = passWord;
+    }
+
+    public Ticket getTicket() {
+        return ticket;
+    }
+
+    public void setTicket(Ticket ticket) {
+        this.ticket = ticket;
+    }
+
+    @OneToOne(mappedBy = "user")
+    private Ticket ticket;
+
+
+    public Member(){}
+
+    public Member(Long id, String firstName, String lastName, String username, String email) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;

@@ -1,7 +1,9 @@
 package com.codecool.appointmentPage.ticket;
 
+import javax.persistence.Embeddable;
 import java.util.Currency;
 
+@Embeddable
 public class Price {
 
     private int amount;
